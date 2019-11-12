@@ -89,7 +89,7 @@ module.exports = function waiter(pool) {
     }
 
     async function allwaiters(){
-        await pool.query('select distinct thedays,')
+        
     }
 
     return {
