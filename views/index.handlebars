@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="waiter.css">
+</head>
+
+<body>
+
+    <div class="center" style="padding-bottom: 2em;">
+        <div class="data">
+            <h3>Hi Waiter</h3>
+            <form action="/waiters/:username" method="POST">
+                <h4>Enter Name Below: </h4><input type="string" onfocus="this.value=''" name="user" value=""
+                    placeholder="Enter A Name" style="width: 10em;">
+                <div style="padding-top: 1em;">
+                    <button class="button-primary AddBtn" on type="submit" name="button2" id="button2">Log In</button>
+                </div>
+
+            </form>
+
+            <form action="/waiters" method="POST">
+                <div style="padding: 1em;">
+
+                    <div class="error" style="padding: 1em;">
+                        {{messages.error}}
+                    </div>
+
+                    <label>Monday <input type="checkbox" name="days" value="Monday" id=""></label>
+                    <label>Tuesday <input type="checkbox" name="days" value="Tuesday" id=""></label>
+                    <label>Wednesday <input type="checkbox" name="days" value="Wednesday" id=""></label>
+                    <label>Thursday <input type="checkbox" name="days" value="Thursday" id=""></label>
+                    <label>Friday <input type="checkbox" name="days" value="Friday" id=""></label>
+                    <label>Saturday <input type="checkbox" name="days" value="Saturday" id=""></label>
+                    <label>Sunday <input type="checkbox" name="days" value="Sunday" id=""></label>
+
+
+                </div>
+                <button class="button-primary AddBtn" on type="submit" name="button" id="button">Submit</button>
+        </div>
+        <div>
+            <a href="/waiters/:username"><h3> Waiters Available</h3></a>
+        </div>
+
+
+    </div>
+    </div>
+    </form>
+    <div class="row" style="padding-left: 4em;">
+        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
+            Monday: <span class="leftCounter">{{mondays}}</span>
+        </div>
+        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
+            Tuesday: <span class="leftCounter">{{tuesdays}}</span>
+        </div>
+        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
+            Wednesday: <span class="leftCounter">{{wednesdays}}</span>
+        </div>
+        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
+            Thursday: <span class="leftCounter">{{thursdays}}</span>
+        </div>
+        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
+            Friday: <span class="leftCounter">{{fridays}}</span>
+        </div>
+        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
+            Saturday: <span class="leftCounter">{{saturdays}}</span>
+        </div>
+        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
+            Sunday: <span class="leftCounter">{{sundays}}</span>
+        </div>
+
+    </div>
+
+    <div class="center">
+
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+  <div class="row">
+<h1>Waiters Available</h1>
+
+<div style="padding-bottom: 1em;">
+          <form action="/back" method="POST">
+              <button class="button-primary resetBtn" on type="submit" name="button3" id="button3" value="button3"
+                style="text-align: left;">Back To App</button>
+            
+      </form>
+</div>
+
+
+<table>
+    <tr>
+        <td>Waiter</td>
+        <td>Days</td>
+    </tr>
+   {{#each userday}}
+    <tr>
+        <td>{{usernames}}</td>
+        <td>{{thedays}}</td>
+    </tr>
+    {{/each}}
+</table>
+</div>
