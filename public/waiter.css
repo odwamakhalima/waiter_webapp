@@ -9,6 +9,9 @@ body {
   left: 0;
   top: 0;
   font-size: 100%;
+  background-image: url(images.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 ::-webkit-input-placeholder {
   text-align: center;
@@ -28,6 +31,10 @@ input {
   position: relative;
   top: -1px;
   *overflow: hidden;
+}
+.warning {
+  background-color:#ADFF2F;
+  font-weight: bold;
 }
 
 :-moz-placeholder { /* Firefox 18- */
@@ -61,11 +68,9 @@ h3 {
   
 } */
 
-
-
 .error{
   color: red;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .error2{

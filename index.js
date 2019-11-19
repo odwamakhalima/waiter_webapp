@@ -42,11 +42,13 @@ app.use(bodyParser.json())
 
 app.get('/',routingFact.main )
 
-app.post('/waiters/:username',routingFact.logIn)
+app.post('/logins',routingFact.logIn)
 
 app.post('/waiters',routingFact.postData)
 
 app.get('/waiters/:username',routingFact.availableWaiters)
+
+app.get('/action',routingFact.actionDay)
 
 
 app.post('/back',function(req,res){
@@ -54,7 +56,7 @@ app.post('/back',function(req,res){
 })
 
 
-var PORT = process.env.PORT || 5002
+var PORT = process.env.PORT || 5003
 
 app.listen(PORT, function () {
     console.log('server', PORT)

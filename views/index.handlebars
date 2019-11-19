@@ -7,16 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="waiter.css">
+
+    <style>
+        .warning {
+            background-color:#ADFF2F;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
 
     <div class="center" style="padding-bottom: 2em;">
         <div class="data">
-            <h3>Hi Waiter</h3>
-            <form action="/waiters/:username" method="POST">
+
+            <form action="/logins" method="POST">
                 <h4>Enter Name Below: </h4><input type="string" onfocus="this.value=''" name="user" value=""
-                    placeholder="Enter A Name" style="width: 10em;">
+                    placeholder="Enter A Name" style="width: 13em;height:2em;text-align: center;">
                 <div style="padding-top: 1em;">
                     <button class="button-primary AddBtn" on type="submit" name="button2" id="button2">Log In</button>
                 </div>
@@ -25,7 +32,7 @@
 
             <form action="/waiters" method="POST">
                 <div style="padding: 1em;">
-
+                    <h3>Hi {{userz}}</h3>
                     <div class="error" style="padding: 1em;">
                         {{messages.error}}
                     </div>
@@ -38,12 +45,13 @@
                     <label>Saturday <input type="checkbox" name="days" value="Saturday" id=""></label>
                     <label>Sunday <input type="checkbox" name="days" value="Sunday" id=""></label>
 
-
                 </div>
                 <button class="button-primary AddBtn" on type="submit" name="button" id="button">Submit</button>
         </div>
         <div>
-            <a href="/waiters/:username"><h3> Waiters Available</h3></a>
+            <a href="/waiters/:username">
+                <h3> Waiters Available</h3>
+            </a>
         </div>
 
 
@@ -51,26 +59,33 @@
     </div>
     </form>
     <div class="row" style="padding-left: 4em;">
-        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
-            Monday: <span class="leftCounter">{{mondays}}</span>
+        <div class="col-1 {{level}}" style="width:7em;height:3em;padding-top:2em;">
+            <a href="/action">Monday: </a>
+            <span class="leftCounter">{{mondays}}</span>
         </div>
-        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
-            Tuesday: <span class="leftCounter">{{tuesdays}}</span>
+        <div class="col-1 {{level2}}" style="width:7em;height:3em;padding-top:2em;">
+            <a href="/action">Tuesday: </a>
+            <span class="leftCounter">{{tuesdays}}</span>
         </div>
-        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
-            Wednesday: <span class="leftCounter">{{wednesdays}}</span>
+        <div class="col-1 {{level3}}" style="width:7em;height:3em;padding-top:2em;">
+            <a href="/action">Wednesday: </a>
+            <span class="leftCounter">{{wednesdays}}</span>
         </div>
-        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
-            Thursday: <span class="leftCounter">{{thursdays}}</span>
+        <div class="col-1 {{level4}}" style="width:7em;height:3em;padding-top:2em;">
+            <a href="/action">Thursday: </a>
+            <span class="leftCounter">{{thursdays}}</span>
         </div>
-        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
-            Friday: <span class="leftCounter">{{fridays}}</span>
+        <div class="col-1 {{level5}}" style="width:7em;height:3em;padding-top:2em;">
+            <a href="/action">Friday: </a>
+            <span class="leftCounter">{{fridays}}</span>
         </div>
-        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
-            Saturday: <span class="leftCounter">{{saturdays}}</span>
+        <div class="col-1 {{level6}}" style="width:7em;height:3em;padding-top:2em;">
+            <a href="/action">Saturday: </a>
+            <span class="leftCounter">{{saturdays}}</span>
         </div>
-        <div class="col-1" style="background-color:silver;width:7em;height:3em;padding-top:2em;">
-            Sunday: <span class="leftCounter">{{sundays}}</span>
+        <div class="col-1 {{level7}}" style="width:7em;height:3em;padding-top:2em;">
+            <a href="/action">Sunday: </a>
+            <span class="leftCounter">{{sundays}}</span>
         </div>
 
     </div>
@@ -78,7 +93,7 @@
     <div class="center">
 
 
-</div>
+    </div>
 </body>
 
 </html>

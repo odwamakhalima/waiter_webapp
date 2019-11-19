@@ -10,4 +10,7 @@ create table mydays (
 	foreign key (names_id) references names(id)
 );
 
-
+create table finaldatas (
+	id serial not null primary key,
+    userdays text not null,
+);
