@@ -16,7 +16,6 @@ module.exports = function waiter(pool) {
 
     var store;
 
-
     async function add(waiters) {
         myNames = waiters
         await pool.query('insert into names (usernames) values ($1)', [myNames]);
@@ -34,8 +33,6 @@ module.exports = function waiter(pool) {
        
         store =  await pool.query('select * from names WHERE usernames = $1', [myNames])
         checkdays = days
-        console.log(store.rows.length);
-       
         
         for (var i = 0; i < checkdays.length; i++) {
 

@@ -100,7 +100,6 @@ module.exports = function waiterRoute(waiterFact) {
     async function logIn(req, res) {
         users = req.body.user
         const myLog = req.params.myLog
-
         if (users === '') {
             req.flash('error', 'Please Enter Your Name')
         }
