@@ -12,5 +12,5 @@ create table mydays (
 
 create table finaldatas (
 	id serial not null primary key,
-    userdays text not null,
+    userdays text not null
 );
