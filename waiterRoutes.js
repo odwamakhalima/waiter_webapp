@@ -16,21 +16,7 @@ module.exports = function waiterRoute(waiterFact) {
         // console.log(waiterFact.reachWarn());
 
         res.render('index', {
-            mondays: mon,
-            tuesdays: tue,
-            wednesdays: wed,
-            thursdays: thu,
-            fridays: fri,
-            saturdays: sat,
-            sundays: sun,
-            userz: users,
-            level: waiterFact.reachWarn(),
-            level2: waiterFact.reachWarn2(),
-            level3: waiterFact.reachWarn3(),
-            level4: waiterFact.reachWarn4(),
-            level5: waiterFact.reachWarn5(),
-            level6: waiterFact.reachWarn6(),
-            level7: waiterFact.reachWarn7(),
+
 
         })
     }
@@ -39,14 +25,16 @@ module.exports = function waiterRoute(waiterFact) {
 
         check = req.body.days
 
-        if (check.length < 3 || check.length > 3) {
-            req.flash('error', 'Please Select 3 days')
+        var dup = await waiterFact.duplicates()
+
+        if (dup >= 1) {
+            req.flash('error', 'You Already Selected Days')
         }
         else {
             await waiterFact.scanDays(check)
-
+        
             week = waiterFact.getDays()
-          
+
             for (var i = 0; i < week.length; i++) {
                 alldays = week[i]
             }
@@ -94,38 +82,72 @@ module.exports = function waiterRoute(waiterFact) {
             }
         }
 
+        await waiterFact.usersDays()
         res.redirect('/')
     }
 
     async function logIn(req, res) {
         users = req.body.user
-        const myLog = req.params.myLog
         if (users === '') {
             req.flash('error', 'Please Enter Your Name')
+            res.redirect('/')
         }
         else {
             await waiterFact.add(users)
+            res.redirect('/waiters/:username')
         }
-        res.redirect('/')
+       
+    }
+    async function showWaiter(req,res){
+        res.render('waiter',{
+            userz: users,
+            che: await waiterFact.checkedbox()
+            
+        })
+
     }
 
     async function availableWaiters(req, res) {
-        res.render('waiter', {
-            userday: await waiterFact.usersDays()
+        res.render('days', {
+            mondays: mon,
+            tuesdays: tue,
+            wednesdays: wed,
+            thursdays: thu,
+            fridays: fri,
+            saturdays: sat,
+            sundays: sun,
+            
+            level: waiterFact.reachWarn(),
+            level2: waiterFact.reachWarn2(),
+            level3: waiterFact.reachWarn3(),
+            level4: waiterFact.reachWarn4(),
+            level5: waiterFact.reachWarn5(),
+            level6: waiterFact.reachWarn6(),
+            level7: waiterFact.reachWarn7(),
+            showfil: await waiterFact.usersDays()
+
         })
     }
 
     async function actionDay(req, res) {
-        // var eachday = req.params.perday
-        res.render('action', {
-            perday: await waiterFact.usersDays()
-        })
+        var fj = await waiterFact.usersDays()
+        console.log(fj.length);
+        await waiterFact.filtering(req.body.mydrop)
+        res.redirect('/days')
     }
+
+    async function resetz(req, res) {
+        await waiterFact.deleteDb()
+        res.redirect('/')
+    }
+
     return {
         main,
         postData,
         logIn,
         availableWaiters,
-        actionDay
+        actionDay,
+        resetz,
+        showWaiter
     }
 }

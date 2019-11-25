@@ -1,25 +1,25 @@
-  <div class="row">
-<h1>Waiters Available</h1>
-
-<div style="padding-bottom: 1em;">
-          <form action="/back" method="POST">
-              <button class="button-primary resetBtn" on type="submit" name="button3" id="button3" value="button3"
-                style="text-align: left;">Back To App</button>
-            
-      </form>
-</div>
+<div class="center" style="padding-bottom: 2em;">
+    <div class="data">
+        <form action="/waiters/:username" method="POST">
+            <div style="padding: 1em;">
+                <h3>HELLO {{userz}}</h3>
 
 
-<table>
-    <tr>
-        <td>Waiter</td>
-        <td>Days</td>
-    </tr>
-   {{#each userday}}
-    <tr>
-        <td>{{usernames}}</td>
-        <td>{{thedays}}</td>
-    </tr>
-    {{/each}}
-</table>
+
+                <div class="error" style="padding: 1em;">
+                    {{messages.error}}
+                </div>
+
+                <label>Monday <input type="checkbox" name="days" value="Monday" id=""{{che}}></label>
+                <label>Tuesday <input type="checkbox" name="days" value="Tuesday" id=""></label>
+                <label>Wednesday <input type="checkbox" name="days" value="Wednesday" id=""></label>
+                <label>Thursday <input type="checkbox" name="days" value="Thursday" id=""></label>
+                <label>Friday <input type="checkbox" name="days" value="Friday" id=""></label>
+                <label>Saturday <input type="checkbox" name="days" value="Saturday" id=""></label>
+                <label>Sunday <input type="checkbox" name="days" value="Sunday" id=""></label>
+
+            </div>
+            <button class="button-primary AddBtn" on type="submit" name="button" id="button">Submit</button>
+        </form>
+    </div>
 </div>

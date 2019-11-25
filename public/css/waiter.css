@@ -128,11 +128,20 @@ h3 {
   margin-right: auto;
 }
 
-.namesUpdate {
-    position: relative;
-    width: 100%;
-    flex: 1;
-  }
+li{
+  border-radius: 10px;
+  border-style: solid;
+  border-color: grey;
+  
+  padding: 12px; 
+  width: 90px;
+  height: 20px; 
+  list-style-type: none;
+  float: left;
+  margin-right: 10px;
+  font-weight: 900;
+  font-size: 0.9rem;
+}
   
   .row {
     position: relative;

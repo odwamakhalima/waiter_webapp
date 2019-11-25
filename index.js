@@ -44,19 +44,19 @@ app.get('/',routingFact.main )
 
 app.post('/logins',routingFact.logIn)
 
-app.post('/waiters',routingFact.postData)
+app.post('/waiters/:username',routingFact.postData)
 
-app.get('/waiters/:username',routingFact.availableWaiters)
+app.get('/waiters/:username',routingFact.showWaiter)
 
-app.get('/action',routingFact.actionDay)
-
-
-app.post('/back',function(req,res){
-  res.redirect('/')
-})
+app.get('/days',routingFact.availableWaiters)
 
 
-var PORT = process.env.PORT || 5003
+app.post('/filter',routingFact.actionDay)
+
+app.post('/rest',routingFact.resetz)
+
+
+var PORT = process.env.PORT || 5001
 
 app.listen(PORT, function () {
     console.log('server', PORT)

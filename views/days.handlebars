@@ -1,0 +1,73 @@
+
+
+    <div class="center">
+
+        <div style="padding: 3em;">
+            <form action="/filter" method="POST">
+                <select id="regdrop" name="mydrop">
+                    <option value="monday" name='drop'>Monday</option>
+                    <option value="tuesday" name='drop'>Tuesday</option>
+                    <option value="wednesday" name='drop'>Wednesday</option>
+                    <option value="thursday" name='drop'>Thursday</option>
+                    <option value="friday" name='drop'>Friday</option>
+                    <option value="saturday" name='drop'>Saturday</option>
+                     <option value="sunday" name='drop'>Sunday</option>
+                </select>
+
+                <button id="button" type="submit" class="button-primary showBtn">Show Waiters</button>
+            </form>
+        </div>
+
+      <div class="row" style="padding-left: 15em;">
+        <div class="col-1 {{level}}" style="width:6em;height:3em;padding-top:2em;">
+            Monday: 
+            <span class="leftCounter">{{mondays}}</span>
+        </div>
+        <div class="col-1 {{level2}}" style="width:6em;height:3em;padding-top:2em;">
+            Tuesday: 
+            <span class="leftCounter">{{tuesdays}}</span>
+        </div>
+        <div class="col-1 {{level3}}" style="width:6em;height:3em;padding-top:2em;">
+            Wednesday: 
+            <span class="leftCounter">{{wednesdays}}</span>
+        </div>
+        <div class="col-1 {{level4}}" style="width:6em;height:3em;padding-top:2em;">
+            Thursday: 
+            <span class="leftCounter">{{thursdays}}</span>
+        </div>
+        <div class="col-1 {{level5}}" style="width:6em;height:3em;padding-top:2em;">
+            Friday: 
+            <span class="leftCounter">{{fridays}}</span>
+        </div>
+        <div class="col-1 {{level6}}" style="width:6em;height:3em;padding-top:2em;">
+            Saturday: 
+            <span class="leftCounter">{{saturdays}}</span>
+        </div>
+        <div class="col-1 {{level7}}" style="width:6em;height:3em;padding-top:2em;">
+            Sunday: 
+            <span class="leftCounter">{{sundays}}</span>
+        </div>
+
+    </div>
+                <div class="error" style="padding: 1em;">
+                    {{messages.error}}
+                </div>
+    <div>
+            <form action="/rest" method="POST">
+            <button class="button-primary ResetBtn" on type="submit" name="button3" id="button">Reset Week</button>
+        </form>
+</div>
+            
+      <div>
+      <ul>
+        {{#each showfil}}
+
+        <li>{{usernames}}</li>
+
+        {{/each}}
+      </ul>
+
+
+        
+    </div>
+    </div>

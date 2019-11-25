@@ -1,16 +1,11 @@
-create table names(
+create table alldays(
 	id serial not null primary key,
-	usernames text not null
+	thedays text not null
 );
 
-create table mydays (
+create table mynames (
 	id serial not null primary key,
-    thedays text not null,
-	names_id int,
-	foreign key (names_id) references names(id)
-);
-
-create table finaldatas (
-	id serial not null primary key,
-    userdays text not null
+    usernames text not null,
+	alldays_id int,
+	foreign key (alldays_id) references alldays(id)
 );
