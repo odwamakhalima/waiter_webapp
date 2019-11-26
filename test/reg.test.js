@@ -1,9 +1,9 @@
 const assert = require('assert');
-var registration = require('../regFact')
+var waits = require('../waiter')
 const pg = require("pg");
 const Pool = pg.Pool;
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost/register';
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost/waiterdb';
 
 const pool = new Pool({
     connectionString
@@ -11,101 +11,47 @@ const pool = new Pool({
 
 describe('The basic database web app', function () {
     beforeEach(async function () {
-        await pool.query("delete from myregnumbers;");
-        await pool.query('insert into mytowns (description) values ($1)', ['CA'])
-        await pool.query('insert into mytowns (description) values ($1)', ['CY'])
-        await pool.query('insert into mytowns (description) values ($1)', ['CL'])
+        await pool.query("delete from mynames;");
+        await pool.query('insert into alldays (thedays) values ($1)',['Monday'])
+        await pool.query('insert into alldays (thedays) values ($1)',['Tuesday'])
+        await pool.query('insert into alldays (thedays) values ($1)',['Wednesday'])
+        await pool.query('insert into alldays (thedays) values ($1)',['Thursday'])
+        await pool.query('insert into alldays (thedays) values ($1)',['Friday'])
+        await pool.query('insert into alldays (thedays) values ($1)',['Saturday'])
+        await pool.query('insert into alldays (thedays) values ($1)',['Sunday'])
     });
 
-    it('should filter each location and store values in different list', async function () {
+
+    it('should add to the days that the user selected', async function () {
+        var waiterFact = waits(pool)
+
+        await waiterFact.add('odwa')
+        await waiterFact.scanDays(['Monday','Tuesday','friday'])
+
+        assert.deepEqual(waiterFact.getDays(),[  {
+        friday: 0,
+        monday: 1,
+        saturday: 0,
+        sunday: 0,
+        thursday: 0,
+        tuesday: 1,
+        wednesday: 0
+      }])
 
 
-
-        const factoryReg = registration(pool)
-        await factoryReg.stored('CA 8734')
-        await factoryReg.stored('CY 868734')
-        await factoryReg.stored('CL 127534')
-
-        await factoryReg.stellenbosch()
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CL 127534' }])
-
-        await factoryReg.capeTown()
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CA 8734' }])
-
-        await factoryReg.bellVille()
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CY 868734' }])
-
-    });
-
-    it('each location must have its own own list', async function () {
-
-
-
-        const factoryReg = registration(pool)
-        await factoryReg.stored('CA 8734')
-        await factoryReg.stored('CY 868734')
-        await factoryReg.stored('CL 127534')
-
-        await factoryReg.stored('CA 45876')
-        await factoryReg.stored('CY 2568')
-        await factoryReg.stored('CL 9865')
-
-        await factoryReg.stellenbosch()
-
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CL 127534' }, { description: 'CL 9865' }])
-
-        await factoryReg.capeTown()
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CA 8734' }, { description: 'CA 45876' }])
-
-        await factoryReg.bellVille()
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CY 868734' }, { description: 'CY 2568' }])
 
     });
 
-    it('should not store registrations with more than 10 numbers', async function () {
+    it('should return users that work only tuesday', async function () {
+        var waiterFact = waits(pool)
+
+        await waiterFact.add('odwa')
+        await waiterFact.scanDays(['Monday','Tuesday','friday'])
+        await waiterFact.filtering('Tuesday')
+
+        assert.deepEqual(await waiterFact.usersDays(),[{thedays:'Tuesday', usernames:'ODWA'}])
 
 
-
-        const factoryReg = registration(pool)
-        await factoryReg.stored('CA 45876')
-        await factoryReg.stored('CY 2568')
-        await factoryReg.stored('CL 9865')
-
-        await factoryReg.stored('CA 873449575468')
-        await factoryReg.stored('CY 86873456476')
-        await factoryReg.stored('CL 127534346576')
-
-        await factoryReg.stellenbosch()
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CL 9865' }])
-
-        await factoryReg.capeTown()
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CA 45876' }])
-
-        await factoryReg.bellVille()
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CY 2568' }])
-
-    });
-
-    it('should filter and not store special characters on the database', async function () {
-
-
-
-        const factoryReg = registration(pool)
-        await factoryReg.stored('CA 8734')
-        await factoryReg.stored('CY 868734')
-        await factoryReg.stored('CL 127534')
-        await factoryReg.stored('CA 87(*&')
-        await factoryReg.stored('CY 86&%%#')
-        await factoryReg.stored('CL 12%%$')
-
-        await factoryReg.stellenbosch()
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CL 127534' }])
-
-        await factoryReg.capeTown()
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CA 8734' }])
-
-        await factoryReg.bellVille()
-        assert.deepEqual(await factoryReg.finalResults(), [{ description: 'CY 868734' }])
 
     });
 

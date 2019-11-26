@@ -13,7 +13,6 @@ module.exports = function waiterRoute(waiterFact) {
     var users;
 
     function main(req, res) {
-        // console.log(waiterFact.reachWarn());
 
         res.render('index', {
 
@@ -32,7 +31,7 @@ module.exports = function waiterRoute(waiterFact) {
         }
         else {
             await waiterFact.scanDays(check)
-        
+
             week = waiterFact.getDays()
 
             for (var i = 0; i < week.length; i++) {
@@ -87,7 +86,9 @@ module.exports = function waiterRoute(waiterFact) {
     }
 
     async function logIn(req, res) {
+
         users = req.body.user
+
         if (users === '') {
             req.flash('error', 'Please Enter Your Name')
             res.redirect('/')
@@ -96,15 +97,13 @@ module.exports = function waiterRoute(waiterFact) {
             await waiterFact.add(users)
             res.redirect('/waiters/:username')
         }
-       
     }
-    async function showWaiter(req,res){
-        res.render('waiter',{
+
+    async function showWaiter(req, res) {
+        res.render('waiter', {
             userz: users,
             che: await waiterFact.checkedbox()
-            
         })
-
     }
 
     async function availableWaiters(req, res) {
@@ -116,7 +115,7 @@ module.exports = function waiterRoute(waiterFact) {
             fridays: fri,
             saturdays: sat,
             sundays: sun,
-            
+
             level: waiterFact.reachWarn(),
             level2: waiterFact.reachWarn2(),
             level3: waiterFact.reachWarn3(),

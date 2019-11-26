@@ -18,10 +18,10 @@ body {
 }
 
 label {
-  display: block;
   padding-left: 20px;
   text-indent: -20px;
 }
+
 input {
   width: 13px;
   height: 13px;
