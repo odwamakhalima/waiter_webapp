@@ -38,8 +38,6 @@ describe('The basic database web app', function () {
         wednesday: 0
       }])
 
-
-
     });
 
     it('should return users that work only tuesday', async function () {

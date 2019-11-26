@@ -113,14 +113,12 @@ module.exports = function waiter(pool) {
         return daysList
     }
 
-    
     async function duplicates() {
         store = await pool.query('select * from mynames WHERE usernames = $1', [myNames])
         return store.rowCount
     }
 
-    async function usersDays() {
-          
+    async function usersDays() { 
         return final
     }
 
