@@ -129,13 +129,13 @@ module.exports = function waiterRoute(waiterFact) {
     }
 
     async function actionDay(req, res) {
-        var fj = await waiterFact.usersDays()
-        console.log(fj.length);
+  
         await waiterFact.filtering(req.body.mydrop)
         res.redirect('/days')
     }
 
     async function resetz(req, res) {
+
         await waiterFact.deleteDb()
         res.redirect('/')
     }

@@ -2,6 +2,7 @@ module.exports = function waiter(pool) {
 
     var final = []
     var daysList = []
+    var myObj = {}
     var myNames;
     var known;
     var checkbox;
@@ -50,6 +51,8 @@ module.exports = function waiter(pool) {
                     final = tueCheck.rows
                     tuesday++
                     checkbox = 'checked'
+            console.log(final);
+
 
 
                 }
@@ -94,7 +97,7 @@ module.exports = function waiter(pool) {
 
             }
             // console.log(final)
-            const myObj = {
+            myObj = {
                 monday,
                 tuesday,
                 wednesday,
@@ -132,6 +135,8 @@ module.exports = function waiter(pool) {
         if (wait === 'monday') {
             monCheck = await pool.query('SELECT alldays.thedays, mynames.usernames FROM alldays INNER JOIN mynames ON alldays.id = mynames.alldays_id where alldays.id = 1')
             final = monCheck.rows
+            
+            
         }
 
         if (wait === 'tuesday') {
