@@ -31,57 +31,55 @@ module.exports = function waiterRoute(waiterFact) {
         }
         else {
             await waiterFact.scanDays(check)
+            
 
-            week = waiterFact.getDays()
+            var mydays = await waiterFact.usersDays2()
 
-            for (var i = 0; i < week.length; i++) {
-                alldays = week[i]
-            }
-            if (mon === 3) {
-                req.flash('error', 'Monday Is Full')
+
+            if (mon === 3 || tue === 3 || wed === 3 || thu === 3 || fri === 3 || sat === 3 || sun === 3) {
+                req.flash('error', 'Day Is Full')
             }
             else {
-                mon = alldays.monday
-            }
-            if (tue === 3) {
-                req.flash('error', 'Tuesday Is Full')
-            }
-            else {
-                tue = alldays.tuesday
-            }
-            if (wed === 3) {
-                req.flash('error', 'Wednesday Is Full')
-            }
-            else {
-                wed = alldays.wednesday
-            }
-            if (thu === 3) {
-                req.flash('error', 'Thursday Is Full')
-            }
-            else {
-                thu = alldays.thursday
-            }
-            if (fri === 3) {
-                req.flash('error', 'Friday Is Full')
-            }
-            else {
-                fri = alldays.friday
-            }
-            if (sat === 3) {
-                req.flash('error', 'Saturday Is Full')
-            }
-            else {
-                sat = alldays.saturday
-            }
-            if (sun === 3) {
-                req.flash('error', 'Sunday Is Full')
-            }
-            else {
-                sun = alldays.sunday
+                for (var x = 0; x < mydays.length; x++) {
+                    var count = mydays[x]
+
+
+                    if (count.thedays === 'monday') {
+                        mon = count.counters
+                    }
+
+                    if (count.thedays === 'tuesday') {
+                        tue = count.counters
+                    }
+
+                    if (count.thedays === 'wednesday') {
+                        wed = count.counters
+                    }
+
+                    if (count.thedays === 'thursday') {
+                        thu = count.counters
+                    }
+
+                    if (count.thedays === 'friday') {
+                        fri = count.counters
+                    }
+
+                    if (count.thedays === 'saturday') {
+                        sat = count.counters
+                    }
+
+                    if (count.thedays === 'saturday') {
+                        sat = count.counters
+                    }
+
+                    if (count.thedays === 'sunday') {
+                        sun = count.counters
+
+                    }
+                }
             }
         }
-
-        await waiterFact.usersDays()
+        //await waiterFact.usersDays()
         res.redirect('/')
     }
 
@@ -101,8 +99,7 @@ module.exports = function waiterRoute(waiterFact) {
 
     async function showWaiter(req, res) {
         res.render('waiter', {
-            userz: users,
-            che: await waiterFact.checkedbox()
+            userz: users
         })
     }
 
@@ -129,16 +126,17 @@ module.exports = function waiterRoute(waiterFact) {
     }
 
     async function actionDay(req, res) {
-  
+
         await waiterFact.filtering(req.body.mydrop)
         res.redirect('/days')
     }
 
     async function resetz(req, res) {
-
         await waiterFact.deleteDb()
+
         res.redirect('/')
     }
+
 
     return {
         main,
@@ -147,6 +145,6 @@ module.exports = function waiterRoute(waiterFact) {
         availableWaiters,
         actionDay,
         resetz,
-        showWaiter
+        showWaiter,
     }
 }

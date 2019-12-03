@@ -240,6 +240,7 @@ li{
 
 @media only screen and (min-width: 45em) {  /* 720px */
   .col-1 {
+   
     width: 4.33%;
   }
 

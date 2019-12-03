@@ -21,7 +21,6 @@ describe('The basic database web app', function () {
         await pool.query('insert into alldays (thedays) values ($1)',['Sunday'])
     });
 
-
     it('should add to the days that the user selected', async function () {
         var waiterFact = waits(pool)
 
@@ -48,7 +47,6 @@ describe('The basic database web app', function () {
         await waiterFact.filtering('Tuesday')
 
         assert.deepEqual(await waiterFact.usersDays(),[{thedays:'Tuesday', usernames:'ODWA'}])
-
 
 
     });
